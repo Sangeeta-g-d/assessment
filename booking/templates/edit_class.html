@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-header bg-secondary text-white rounded-top-4">
+          <h5 class="mb-0">Edit Fitness Class</h5>
+        </div>
+        <div class="card-body">
+          <form method="POST">
+            {% csrf_token %}
+            <div class="row g-4">
+
+              <!-- Class Type -->
+              <div class="col-md-6">
+                <label for="name" class="form-label fw-semibold">Class Type</label>
+                <select id="name" name="name" class="form-select" required>
+                  <option value="">-- Select Class Type --</option>
+                  <option value="Yoga" {% if class.name == 'Yoga' %}selected{% endif %}>Yoga</option>
+                  <option value="Zumba" {% if class.name == 'Zumba' %}selected{% endif %}>Zumba</option>
+                  <option value="HIIT" {% if class.name == 'HIIT' %}selected{% endif %}>HIIT</option>
+                </select>
+              </div>
+
+              <!-- Instructor -->
+              <div class="col-md-6">
+                <label for="instructor" class="form-label fw-semibold">Instructor</label>
+                <input
+                  type="text"
+                  id="instructor"
+                  name="instructor"
+                  class="form-control"
+                  value="{{ class.instructor }}"
+                  required
+                >
+              </div>
+
+              <!-- Date -->
+              <div class="col-md-6">
+                <label for="date_time" class="form-label fw-semibold">Class Date</label>
+                <input
+                  type="date"
+                  id="date_time"
+                  name="date_time"
+                  class="form-control"
+                  value="{{ class.start_date|date:'Y-m-d' }}"
+                  required
+                >
+              </div>
+
+              <!-- Available Slots -->
+              <div class="col-md-6">
+                <label for="available_slots" class="form-label fw-semibold">Available Slots</label>
+                <input
+                  type="number"
+                  id="available_slots"
+                  name="available_slots"
+                  class="form-control"
+                  min="0"
+                  max="{{ class.total_slots }}"
+                  value="{{ class.available_slots }}"
+                  required
+                >
+                <div class="form-text">Maximum slots: {{ class.total_slots }}</div>
+              </div>
+
+            </div>
+
+            <div class="mt-4 text-end">
+              <button type="submit" class="btn btn-success px-4">Save Changes</button>
+              <a href="{% url 'manage_classes' %}" class="btn btn-secondary ms-2">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

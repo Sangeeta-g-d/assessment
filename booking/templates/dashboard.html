@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h5>Dashboard Overview</h5>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card text-white mb-3">
+            <div class="card-body">
+                <h6 class="card-title">Total Classes</h6>
+                <p class="card-text">{{ total_classes }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white mb-3">
+            <div class="card-body">
+                <h6 class="card-title">Total Bookings</h6>
+                <p class="card-text">{{ total_bookings }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
